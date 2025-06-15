@@ -2,7 +2,7 @@ FROM scratch
 
 # Copy binary and assets
 COPY basket /app/
-COPY assets /app/assets
+COPY assets/ /app/assets/
 
 WORKDIR /app
 

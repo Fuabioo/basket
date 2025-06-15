@@ -34,8 +34,8 @@ archives:
 
 dockers:
   - image_templates:
-      - "ghcr.io/fuabioo/basket:{{ .Version }}"
-      - "ghcr.io/fuabioo/basket:latest"
+      - "ghcr.io/fuabioo/basket:{{ .Version }}-amd64"
+      - "ghcr.io/fuabioo/basket:latest-amd64"
     dockerfile: Dockerfile.goreleaser
     use: buildx
     build_flag_templates:
@@ -45,7 +45,74 @@ dockers:
       - "--label=org.opencontainers.image.version={{.Version}}"
       - "--label=org.opencontainers.image.source=https://github.com/Fuabioo/basket"
       - "--label=org.opencontainers.image.description=Simple file server"
-      - "--platform=linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,darwin/amd64,darwin/arm64"
+      - "--platform=linux/amd64"
+    goarch: amd64
+    extra_files:
+      - assets/
+  - image_templates:
+      - "ghcr.io/fuabioo/basket:{{ .Version }}-arm64"
+      - "ghcr.io/fuabioo/basket:latest-arm64"
+    dockerfile: Dockerfile.goreleaser
+    use: buildx
+    build_flag_templates:
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source=https://github.com/Fuabioo/basket"
+      - "--label=org.opencontainers.image.description=Simple file server"
+      - "--platform=linux/arm64"
+    goarch: arm64
+    extra_files:
+      - assets/
+  - image_templates:
+      - "ghcr.io/fuabioo/basket:{{ .Version }}-armv6"
+      - "ghcr.io/fuabioo/basket:latest-armv6"
+    dockerfile: Dockerfile.goreleaser
+    use: buildx
+    build_flag_templates:
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source=https://github.com/Fuabioo/basket"
+      - "--label=org.opencontainers.image.description=Simple file server"
+      - "--platform=linux/arm/v6"
+    goarch: arm
+    goarm: 6
+    extra_files:
+      - assets/
+  - image_templates:
+      - "ghcr.io/fuabioo/basket:{{ .Version }}-armv7"
+      - "ghcr.io/fuabioo/basket:latest-armv7"
+    dockerfile: Dockerfile.goreleaser
+    use: buildx
+    build_flag_templates:
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source=https://github.com/Fuabioo/basket"
+      - "--label=org.opencontainers.image.description=Simple file server"
+      - "--platform=linux/arm/v7"
+    goarch: arm
+    goarm: 7
+    extra_files:
+      - assets/
+
+docker_manifests:
+  - name_template: ghcr.io/fuabioo/basket:{{ .Version }}
+    image_templates:
+      - ghcr.io/fuabioo/basket:{{ .Version }}-amd64
+      - ghcr.io/fuabioo/basket:{{ .Version }}-arm64
+      - ghcr.io/fuabioo/basket:{{ .Version }}-armv6
+      - ghcr.io/fuabioo/basket:{{ .Version }}-armv7
+  - name_template: ghcr.io/fuabioo/basket:latest
+    image_templates:
+      - ghcr.io/fuabioo/basket:latest-amd64
+      - ghcr.io/fuabioo/basket:latest-arm64
+      - ghcr.io/fuabioo/basket:latest-armv6
+      - ghcr.io/fuabioo/basket:latest-armv7
 
 release:
   github:
