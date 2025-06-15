@@ -1,0 +1,10 @@
+FROM scratch
+
+# Copy binary and assets
+COPY basket /app/
+COPY assets /app/assets
+
+WORKDIR /app
+
+# Command to run the application
+CMD ["./basket"]

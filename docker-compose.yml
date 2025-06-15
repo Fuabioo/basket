@@ -1,0 +1,4 @@
+services:
+  basket:
+    build: .
+    image: ghcr.io/fuabioo/basket

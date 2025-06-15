@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{.Filename}}</title>
+</head>
+<body>
+  <h1>Contents of {{.Filename}}</h1>
+  <ul id="file-list">
+    {{range .Files}}
+    <li>
+      <a class="file-link" data-base64path="{{.Base64Path}}">{{.Filename}}</a>
+    </li>
+    {{end}}
+  </ul>
+  <a id="download-link" target="_blank">Download ZIP</a>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var host = window.location.origin;
+      var zipPath = "{{.ZipPath}}";
+
+      document.querySelectorAll('.file-link').forEach(function(link) {
+        var base64Path = link.getAttribute('data-base64path');
+        link.href = host + zipPath + '?p=' + base64Path;
+      });
+
+      var downloadLink = document.getElementById('download-link');
+      downloadLink.href = host + zipPath + '?d=true';
+    });
+  </script>
+</body>
+</html>
