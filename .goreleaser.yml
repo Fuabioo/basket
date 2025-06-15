@@ -14,6 +14,9 @@ builds:
       - amd64
       - arm
       - arm64
+    goarm:
+      - "6"
+      - "7"
     ldflags:
       - -s -w -X main.version={{.Version}}
 
@@ -34,6 +37,7 @@ dockers:
       - "ghcr.io/fuabioo/basket:{{ .Version }}"
       - "ghcr.io/fuabioo/basket:latest"
     dockerfile: Dockerfile.goreleaser
+    use: buildx
     build_flag_templates:
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
@@ -41,7 +45,7 @@ dockers:
       - "--label=org.opencontainers.image.version={{.Version}}"
       - "--label=org.opencontainers.image.source=https://github.com/Fuabioo/basket"
       - "--label=org.opencontainers.image.description=Simple file server"
-      - "--platform=linux/amd64,linux/arm64"
+      - "--platform=linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,darwin/amd64,darwin/arm64"
 
 release:
   github:
